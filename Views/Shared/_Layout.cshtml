@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mercado Web</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Mercado Web", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                @if (Request.IsAuthenticated)
+                {
+
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Produtos<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Cadastra Produto", "CadastraProdutos", "CadastroProdutos")</li>
+
+                                <li>@Html.ActionLink("Produtos", "Produtos", "CadastroProdutos")</li>
+                                <li>@Html.ActionLink("Produtos por Categoria", "ProdutosCategoria", "CadastroProdutos")</li>
+                                <li>@Html.ActionLink("Produtos por SubCategoria", "ProdutosSubCategoria", "CadastroProdutos")</li>
+
+                            </ul>
+
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorias<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Cadastrar Categoria", "CadastrarCategoria", "CadastroCategorias")</li>
+                                <li>@Html.ActionLink("Cadastrar SubCategoria", "CadastrarSubCategoria", "CadastroCategorias")</li>
+
+                                <li>@Html.ActionLink("Gerenciar Categoria", "GerenciarCategoria", "CadastroCategorias")</li>
+                                <li>@Html.ActionLink("GerenciarSubCategoria", "GerenciarSubCategoria", "CadastroCategorias")</li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Usuários<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Cadastrar Novo Usuario", "CadastrarNovoUsuario", "CadastroUsuario")</li>
+
+                                <li>@Html.ActionLink("Perfil Usuario", "PerfilUsuario", "CadastroUsuario")</li>
+
+                                <li>@Html.ActionLink("Usuários", "Usuario", "CadastroUsuario")</li>
+
+
+                            </ul>
+                        </li>
+
+
+                    </ul>
+
+                    using (Html.BeginForm("LogOff", "Conta", FormMethod.Post, new { id = "logoffForm" }))
+                    {
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="#">Olá @User.Identity.Name</a></li>
+
+                            <li>
+                                <a href="javascript:document.getElementById('logoffForm').submit()">Sair</a>
+                            </li>
+
+
+                        </ul>
+                    }
+                }
+                else
+                {
+
+                    <ul class="nav navbar-nav navbar-right">
+
+                        <li>@Html.ActionLink("Login", "Sobre", "Home")</li>
+
+
+
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Mercado Web</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
